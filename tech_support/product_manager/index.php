@@ -30,6 +30,20 @@ if($action == 'deleteProduct') {
 }
 
 if($action == 'addProduct') {
+    if (isset($_POST['productCode']) && isset($_POST['productName']) && isset($_POST['productVersion']) && isset($_POST['productReleaseDate'])) {
+        $productCode = $_POST['productCode'];
+        $name = $_POST['productName'];
+        $version = $_POST['productVersion'];
+        $releaseDate = $_POST['productReleaseDate'];
+        addProduct($productCode, $name, $version, $releaseDate);
+        header("Location: ../product_manager/index.php?action=listProducts");
+    } else {        
+        header("Location: ../product_manager/index.php?action=errorPage&error=You don't have all required information");
+    }
+}
 
+if($action == 'errorPage') {
+    $error = $_GET['error'];
+    include("../view/error.php");
 }
 ?>

@@ -24,4 +24,16 @@ function deleteProduct($productCode) {
     $statement->closeCursor();
 }
 
+function addProduct($productCode, $name, $version, $releaseDate) {
+    global $db;
+    $query = 'INSERT INTO products (productCode, name, version, releaseDate) VALUES (:productCode, :name, :version, :releaseDate)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':productCode', $productCode);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':version', $version);
+    $statement->bindValue(':releaseDate', $releaseDate);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
 ?>

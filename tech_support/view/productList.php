@@ -18,7 +18,7 @@
                         <td><?php echo $product["version"]; ?></td>
                         <td><?php echo $product["releaseDate"]; ?></td>
                         <td>
-                            <form action="product_manager/index.html" method="post">
+                            <form action="../product_manager/index.php" method="post">
                                 <input type="hidden" name="action" value="deleteProduct" />
                                 <input type="hidden" name="productCode" value="<?php echo $product["productCode"]; ?>" />
                                 <input type="submit" value="Delete" />

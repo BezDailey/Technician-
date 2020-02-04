@@ -5,7 +5,7 @@
     <head>
         <title>SportsPro Technical Support</title>
         <link rel="stylesheet" type="text/css"
-              href="/projects/tech_support/main.css" />
+              href="/projects/Technician-/tech_support/main.css" />
     </head>
 
     <!-- the body section -->
@@ -14,6 +14,6 @@
         <div id="header">
             <h1>SportsPro Technical Support</h1>
             <p>Sports management software for the sports enthusiast</p>
-            <ul class="nav"><li><a href="/projects/tech_support/">Home</a></li></ul>
+            <ul class="nav"><li><a href="/projects/Technician-/tech_support/">Home</a></li></ul>
         </div>
        
