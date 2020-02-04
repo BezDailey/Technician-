@@ -39,4 +39,30 @@
         $statement->execute();
         $statement->closeCursor();
     }
+
+    function customerLogin($customerEmail) {
+        global $db;
+        $query = "SELECT * FROM customers WHERE email = :email";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':email', $customerEmail);
+        $statement->execute();
+        $customer = $statement->fetch();
+        $statement->closeCursor();
+        if(is_array($customer)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getCustomerByEmail($customerEmail) {
+        global $db;
+        $query = "SELECT * FROM customers WHERE email = :email";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':email', $customerEmail);
+        $statement->execute();
+        $customer = $statement->fetch();
+        $statement->closeCursor();
+        return $customer;
+    }
 ?>
