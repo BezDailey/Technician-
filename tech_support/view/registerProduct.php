@@ -21,6 +21,7 @@
                 <tr>
                     <td></td>
                     <td>
+                        <input type='hidden' name='customerId' value='<?php $customer['customerID']; ?>' />
                         <input type='submit' value='Register Product' />
                     </td>
                 </tr>
