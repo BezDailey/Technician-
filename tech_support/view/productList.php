@@ -12,11 +12,15 @@
             </thead>
             <tbody>
                 <?php foreach ($products as $product): ?>
+                    <?php 
+                    $releaseDate = new DateTime($product['releaseDate']);
+                    $releaseDateFormated = $releaseDate->format('n-j-Y');
+                    ?>
                     <tr>
                         <td><?php echo $product["productCode"]; ?></td>
                         <td><?php echo $product["name"]; ?></td>
                         <td><?php echo $product["version"]; ?></td>
-                        <td><?php echo $product["releaseDate"]; ?></td>
+                        <td><?php echo $releaseDateFormated; ?></td>
                         <td>
                             <form action="../product_manager/index.php" method="post">
                                 <input type="hidden" name="action" value="deleteProduct" />

@@ -22,7 +22,7 @@
                 <tr>
                     <td><label for="productReleaseDate">Release Date:</label></td>
                     <td><input type="text" name="productReleaseDate" id="productReleaseDate" required/></td>
-                    <td><p>Use 'yyyy-mm-dd' format</p></td>
+                    <td><p>Use any valid date format</p></td>
                 </tr>
                 <tr>
                     <td></td>

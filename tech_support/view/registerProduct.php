@@ -26,6 +26,11 @@
                     </td>
                 </tr>
             </form>
-        </table> 
+        </table>
+        <p>You are logged in as <?php echo $customerEmail; ?></p>
+        <form action='../product_register/index.php' method='post'>
+            <input type='hidden' name='action' value='deleteCustomerCookie' />
+            <input type='submit' value='Logout' />
+        </form>
     </div>
 <?php include('footer.php'); ?>

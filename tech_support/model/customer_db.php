@@ -46,9 +46,9 @@
         $statement = $db->prepare($query);
         $statement->bindValue(':email', $customerEmail);
         $statement->execute();
-        $customer = $statement->fetch();
+        $customer = $statement->rowCount();
         $statement->closeCursor();
-        if(is_array($customer)) {
+        if($customer > 0) {
             return true;
         } else {
             return false;

@@ -29,8 +29,14 @@
                     <td><input type='text' value='<?php echo $customer['postalCode']; ?>' name='customerPostalCode' maxlength='20' required/>
                 </tr>
                 <tr>
-                    <td><label>Country Code:</label></td>
-                    <td><input type='text' value='<?php echo $customer['countryCode']; ?>' name='customerCountryCode' maxlength='2' required/>
+                    <td><label>Country:</label></td>
+                    <td>
+                        <select name="customerCountryCode" required>
+                            <?php foreach($countries as $country): ?>
+                                <option value='<?php echo $country['countryCode']; ?>' <?php if($country['countryCode'] == $customer['countryCode']) echo "selected";?>><?php echo $country['countryName']; ?></option>
+                            <?php endforeach; ?> 
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td><label>Phone:</label></td>
