@@ -1,6 +1,8 @@
 <?php 
-require('../model/database.php');
-require('../model/technician_db.php');
+require('../model/database_oo.php');
+require('../model/technician_db_oo.php');
+require('../model/technician.php');
+require_once('../model/validate.php');
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -11,14 +13,14 @@ if (isset($_POST['action'])) {
 }
 
 switch ($action) {
-    case 'listTechnician':
-        $technicians = getTechnicians();
+    case 'listTechnicians':
+        $technicians = TechnicianDB::getTechnicians();
         include('../view/technicianList.php');
         break;
     case 'deleteTechnician':
         $technicianId = filter_input(INPUT_POST,'technicianId');
         if (isset($technicianId) && !empty($technicianId)) {
-            deleteTechnician($technicianId);
+            TechnicianDB::deleteTechnician($technicianId);
             header('Location: ../technician_manager/index.php?action=listTechnicians');
         } else {
             $error = "Technician Id is either empty or not set.";
@@ -50,7 +52,7 @@ switch ($action) {
         } 
         
         if($error == "") {
-            addTechnician($technicianFirstName, $technicianLastName, $technicianEmail, $technicianPhone, $technicianPassword);
+            TechnicianDB::addTechnician($technicianFirstName, $technicianLastName, $technicianEmail, $technicianPhone, $technicianPassword);
             Header("Location: ../technician_manager/index.php?action=listTechnicians");
         } else {
             include("../errors/error.php");

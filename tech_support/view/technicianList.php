@@ -4,8 +4,7 @@
     <table>
         <thead>
             <tr>
-                <td>First Name</td>
-                <td>Last Name</td>
+                <td>Name</td>
                 <td>Email</td>
                 <td>Phone</td>
                 <td>Password</td>
@@ -15,15 +14,14 @@
         <tbody>
             <?php foreach($technicians as $row): ?>
                 <tr>
-                    <td><?php echo $row['firstName']; ?></td>
-                    <td><?php echo $row['lastName']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
-                    <td><?php echo $row['phone']; ?></td>
-                    <td><?php echo $row['password']; ?></td>
+                    <td><?php echo $row->getFullName(); ?></td>
+                    <td><?php echo $row->getEmail(); ?></td>
+                    <td><?php echo $row->getPhone(); ?></td>
+                    <td><?php echo $row->getPassword(); ?></td>
                     <td>
                         <form action='../technician_manager/index.php' method='post'>
                             <input type='hidden' name='action' value='deleteTechnician' />
-                            <input type='hidden' name='technicianId' value='<?php echo $row['techID']; ?>' />
+                            <input type='hidden' name='technicianId' value='<?php echo $row->getTechID(); ?>' />
                             <input type='submit' value='Delete' />
                         </form>
                     </td>
