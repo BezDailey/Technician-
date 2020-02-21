@@ -3,6 +3,7 @@ require('../model/database_oo.php');
 require('../model/technician_db_oo.php');
 require('../model/technician.php');
 require_once('../model/validate.php');
+require_once('../model/fields.php');
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -33,30 +34,57 @@ switch ($action) {
         $technicianEmail = filter_input(INPUT_POST, 'technicianEmail', FILTER_VALIDATE_EMAIL);
         $technicianPhone = filter_input(INPUT_POST, 'technicianPhone');
         $technicianPassword = filter_input(INPUT_POST, 'technicianPassword');
-        $error = "";
-    
-        if (!isset($technicianFirstName) && empty($technicianFirstName)) {
-            $error += "Technician first name is empty or not set. \n";
-        } 
-        if (!isset($technicianLastName) && empty($technicianLastName)) {
-            $error += "Technician last name is empty or not set. \n";
-        } 
-        if (!isset($technicianEmail) && empty($technicianEmail)) {
-            $error += "Technician email is empty or not set. \n";
+        $error = false;
+        //creating field vars
+        $firstNameField = new Field('technicianFirstName', $technicianFirstName);
+        $lastNameField = new Field('technicianLastName', $technicianLastName);
+        $emailField = new Field('technicianEmail', $technicianEmail);
+        $phoneField = new Field('technicianPhone', $technicianPhone);
+        $passwordField = new Field('technicianPassword', $technicianPassword);
+        //doing validation
+        $firstNameError = Validate::validateText($firstNameField->getValue(), true, 1, 51);
+        if($firstNameError != 1) {
+            $firstNameField->setErrorMessage($firstNameError);
+            $error = true;
         }
-        if (!isset($technicianPhone) && empty($technicianPhone)) {
-            $error += "Technician phone is empty or not set. \n";
+        $lastNameError = Validate::validateText($lastNameField->getValue(), true, 1, 51);
+        if ($lastNameError != 1) {
+            $lastNameField->setErrorMessage($lastNameError);
+            $error = true;
         }
-        if (!isset($technicianPassword) && empty($technicianPasword)) {
-            $error += "Technician password is empty or not set. \n";
-        } 
-        
-        if($error == "") {
+        $emailError = Validate::validateEmail($emailField->getValue());
+        if($emailError != 1) {
+            $emailField->setErrorMessage($emailError);
+            $error = true;
+        }
+        $passwordError = Validate::validateText($passwordField->getValue(), true, 6, 21);
+        if($passwordError != 1) {
+            $passwordField->setErrorMessage($passwordError);
+            $error = true;
+        }
+        $phoneError = Validate::validatePhone($phoneField->getValue());
+        if ($phoneError != 1) {
+            $phoneField->setErrorMessage($phoneError);
+            $error = true;
+        }
+
+        //either adds technician or returns form with errors
+        if($error === false) {
             TechnicianDB::addTechnician($technicianFirstName, $technicianLastName, $technicianEmail, $technicianPhone, $technicianPassword);
             Header("Location: ../technician_manager/index.php?action=listTechnicians");
         } else {
-            include("../errors/error.php");
+            include("../view/addTechnician.php");
         }
+        break;
+    case "showAddForm":
+        //creating field vars
+        $firstNameField = new Field('technicianFirstName', '');
+        $lastNameField = new Field('technicianLastName', '');
+        $emailField = new Field('technicianEmail', '');
+        $phoneField = new Field('technicianPhone', '');
+        $passwordField = new Field('technicianPassword', '');
+        //redirecting to addTechnician form
+        include('../view/addTechnician.php');
         break;
     default:
         $error = '/technician_manager/index.php $action does not have a proper value.';

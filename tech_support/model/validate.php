@@ -17,7 +17,7 @@
         }
 
         public static function validatePhone($value) {
-            $validate = self::validateText($value, true, 14, 14);
+            $validate = self::validateText($value, true, 14, 15);
             if ($validate === true) {
                 $match = preg_match(self::$phonePattern, $value);
                 if($match === 1) {

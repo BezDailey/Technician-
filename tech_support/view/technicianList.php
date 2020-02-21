@@ -29,6 +29,6 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <ul class="nav"><li><a href="../view/addTechnician.php">Add Technician</a></li></ul>
+    <ul class="nav"><li><a href="../technician_manager/index.php?action=showAddForm">Add Technician</a></li></ul>
 </div>
 <?php include 'footer.php'; ?>
