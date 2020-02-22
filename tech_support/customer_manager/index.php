@@ -27,6 +27,10 @@ switch ($action) {
         include('../view/customerSearch.php');
         break;
     case 'selectCustomer':
+        //setting postBack
+        $postBack = false;
+
+        //getting customer data
         $customerId = $_POST['customerId'];
         $customer = getCustomer($customerId);
         $countries = getCountries();
@@ -55,6 +59,8 @@ switch ($action) {
         $customerPhone = filter_input(INPUT_POST, 'customerPhone');
         $customerEmail = filter_input(INPUT_POST, 'customerEmail');
         $customerPassword = filter_input(INPUT_POST, 'customerPassword');
+        $countries = getCountries();
+        $customer = getCustomer($customerId);
         //creating field var for fields on update customer page
         $firstNameField = new Field('customerFirstName', $customerFirstName);
         $lastNameField = new Field('customerLastName', $customerFirstName);
@@ -113,12 +119,18 @@ switch ($action) {
             $error = true;
         }
         //redirect or add customer
-        if ($error === true) {
+        if ($error === true) {  
+            $name = "postBack";
+            $value = true;
+            $expire = strtotime("+1 day");
+            $path = '/';
+            setcookie($name, $value, $expire, $path);
             include('../view/updateCustomer.php');
 
+        } else {
+            updateCustomer($customerId, $customerFirstName, $customerLastName, $customerAddress, $customerCity, $customerState, $customerPostalCode, $customerCountryCode, $customerPhone, $customerEmail, $customerPassword);
+            header("Location: ../customer_manager/index.php?action=searchCustomers");
         }
-        //updateCustomer($customerId, $customerFirstName, $customerLastName, $customerAddress, $customerCity, $customerState, $customerPostalCode, $customerCountryCode, $customerPhone, $customerEmail, $customerPassword);
-        //header("Location: ../customer_manager/index.php?action=searchCustomers");
         break;
     default:
         $error = '/customer_manager/index.php does not have a value for $action';
