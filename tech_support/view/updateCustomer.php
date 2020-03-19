@@ -11,16 +11,29 @@
 
         switch ($postBack) {
             case false: 
-                //seting vars to be displayed on form
-                $customerFirstNameField = $customer['firstName'];
-                $customerLastNameField = $customer['lastName'];
-                $customerAddressField = $customer['address'];
-                $customerCityField = $customer['city'];
-                $customerStateField = $customer['state'];
-                $customerPostalCodeField = $customer['postalCode'];
-                $customerPhoneField = $customer['phone'];
-                $customerEmailField = $customer['email'];
-                $custmerPasswordField = $customer['password'];
+                if (isset($customer)){
+                    //seting vars to be displayed on form
+                    $customerFirstNameField = $customer['firstName'];
+                    $customerLastNameField = $customer['lastName'];
+                    $customerAddressField = $customer['address'];
+                    $customerCityField = $customer['city'];
+                    $customerStateField = $customer['state'];
+                    $customerPostalCodeField = $customer['postalCode'];
+                    $customerPhoneField = $customer['phone'];
+                    $customerEmailField = $customer['email'];
+                    $custmerPasswordField = $customer['password'];
+                } else {
+                    $customerFirstNameField =  '';
+                    $customerLastNameField =  '';
+                    $customerAddressField =  '';
+                    $customerCityField = '';
+                    $customerStateField = '';
+                    $customerPostalCodeField =  '';
+                    $customerPhoneField =  '';
+                    $customerEmailField =  '';
+                    $custmerPasswordField = '';
+                    $addCustomer = true;
+                }
                 break;
             case true:
                 //setting vars to display previous values if postback
@@ -41,10 +54,14 @@
         }
     ?>
     <div id='main'>
-        <h1>View/Update Customer</h1>
+        <h1>Add/Update Customer</h1>
         <table id='no_border'>
             <form action='../customer_manager/index.php' method='post'>
-                <input type='hidden' name='action' value='updateCustomer' />
+                <?php if(isset($addCustomer)) : ?>
+                    <input type='hidden' name='action' value='addCustomer' />
+                <?php else : ?>
+                    <input type='hidden' name='action' value='updateCustomer' />
+                <?php endif; ?>           
                 <input type='hidden' name='customerId' value='<?php echo $customerId?>'/>
                 <tr>
                     <td><label>First Name:</label></td>
@@ -75,7 +92,11 @@
                     <td>
                         <select name="customerCountryCode" required>
                             <?php foreach($countries as $country): ?>
-                                <option value='<?php echo $country['countryCode']; ?>' <?php if($country['countryCode'] == $customer['countryCode']) echo "selected";?>><?php echo $country['countryName']; ?></option>
+                                <?php if(isset($addCustomer)) : ?>
+                                    <option value='<?php echo $country['countryCode']; ?>'><?php echo $country['countryName']; ?></option>
+                                <?php else : ?>
+                                    <option value='<?php echo $country['countryCode']; ?>' <?php if($country['countryCode'] == $customer['countryCode']) echo "selected";?>><?php echo $country['countryName']; ?></option>
+                                <?php endif; ?>
                             <?php endforeach; ?> 
                         </select>
                     </td>
@@ -94,7 +115,11 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type='submit' value='Update Customer' /></td>
+                    <?php if(isset($addCustomer)) : ?>
+                        <td><input type='submit' value='Add Customer' /></td>
+                    <?php else : ?>
+                        <td><input type='submit' value='Update Customer' /></td>
+                    <?php endif; ?>
                 </tr>
             </form>
         </table>

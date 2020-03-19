@@ -36,5 +36,10 @@
                 </tbody>
             </table>
         <?php endif; ?>
+        <h1>Add a new customer</h1>
+        <form action='../customer_manager/index.php' method='post'>
+            <input type='hidden' name='action' value='addCustomerForm' />
+            <input type='submit' value='Add Customer' />
+        </form>
     </div>
 <?php include 'footer.php'; ?>

@@ -1,6 +1,7 @@
 <?php
 require_once('../model/database.php');
 require_once('../model/product_db.php');
+require_once('../model/database_oo.php');
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];

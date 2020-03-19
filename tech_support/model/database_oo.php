@@ -13,11 +13,17 @@
                 self::$db = new PDO (self::$dsn, self::$username, self::$password);
             } catch (PDOException $e){
                 $error = $e->getMessage();
-                include('../errors/error.php');
+                include('../errors/database_error.php');
                 exit();
             }
         }
         return self::$db;
+    }
+
+    public static function display_db_error($error_message) {
+        $error = $error_message;
+        include('../errors/database_error.php');
+        exit();
     }
     }
 ?>
