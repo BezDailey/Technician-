@@ -19,7 +19,7 @@ if (isset($_POST['action'])) {
 
 switch($action) {
     case 'login':
-        if($_SESSION['is_valid_admin'] == "true") {
+        if(isset($_SESSION['is_valid_admin']) AND $_SESSION['is_valid_admin'] == "true") {
             include('admin_menu_page.php');
         } else {
             include('admin_login_page.php');
