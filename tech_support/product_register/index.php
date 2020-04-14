@@ -34,7 +34,8 @@ switch ($action) {
         break;
     case 'customerLoginAttempt':
         $customerEmail = filter_input(INPUT_POST, 'customerEmail');
-        if (customerLogin($customerEmail)) {
+        $password = filter_input(INPUT_POST, 'password');
+        if (customerLogin($customerEmail, $password)) {
             $customer = getCustomerByEmail($customerEmail);
             $products = getProducts();
             $name = 'customerEmail';

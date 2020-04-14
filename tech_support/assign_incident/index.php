@@ -5,6 +5,8 @@
     require_once('../model/customer_db.php');
     require_once('../model/technician_db_oo.php');
     require_once('../model/technician.php');
+    require_once('../model/authentication.php');
+    Authentication::valid_role($admin);
     //gets or sets $action
     if (isset($_POST['action'])) {
         $action = $_POST['action'];

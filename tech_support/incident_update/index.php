@@ -29,6 +29,7 @@
             break;
         case 'login':
             $email = filter_input(INPUT_POST,'email', FILTER_VALIDATE_EMAIL);
+            $password = filter_input(INPUT_POST,'password');
             if($email == FALSE){
                 $error = 'The technician email should be set.';
                 include('../errors/error.php');
@@ -37,7 +38,7 @@
                 include('../errors/error.php');
             } else {
                 $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-                $loginAttempt = TechnicianDB::doesTechnicianExist($email);
+                $loginAttempt = TechnicianDB::doesTechnicianExist($email, $password);
                 if ($loginAttempt == 1) {
                     session_start();
                     $_SESSION['technicianEmail'] = $email;

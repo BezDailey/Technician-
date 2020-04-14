@@ -1,6 +1,8 @@
 <?php
     require_once('../model/incident_db.php');
     require_once('../model/database_oo.php');
+    require_once('../model/authentication.php');
+    Authentication::valid_role($admin);
 
     if (isset($_POST['action'])) {
         $action = $_POST['action'];

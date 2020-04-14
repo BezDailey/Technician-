@@ -128,12 +128,13 @@
 
         }
 
-        public static function doesTechnicianExist($email) {
+        public static function doesTechnicianExist($email, $password) {
             $db = Database::getDB();
-            $query = 'SELECT COUNT(*) FROM `technicians` WHERE email = :email';
+            $query = 'SELECT COUNT(*) FROM `technicians` WHERE email = :email AND password = :password';
             try {
                 $statement = $db->prepare($query);
                 $statement->bindValue(':email', $email);
+                $statement->bindValue(':password', $password);
                 $statement->execute();
                 $row = $statement->fetch();
                 $statement->closeCursor();

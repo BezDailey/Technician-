@@ -79,12 +79,13 @@
         }
     }
 
-    function customerLogin($customerEmail) {
+    function customerLogin($customerEmail, $password) {
         try {
             global $db;
-            $query = "SELECT * FROM customers WHERE email = :email";
+            $query = "SELECT * FROM customers WHERE email = :email AND password = :password";
             $statement = $db->prepare($query);
             $statement->bindValue(':email', $customerEmail);
+            $statement->bindValue(':password', $password);
             $statement->execute();
             $customer = $statement->rowCount();
             $statement->closeCursor();

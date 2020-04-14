@@ -4,6 +4,8 @@ require('../model/technician_db_oo.php');
 require('../model/technician.php');
 require_once('../model/validate.php');
 require_once('../model/fields.php');
+require_once('../model/authentication.php');
+Authentication::valid_role($admin);
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
