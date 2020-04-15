@@ -7,7 +7,7 @@ $lifetime = 60 * 60 * 24;
 $path = realpath('');
 session_set_cookie_params($lifetime, $path);
 session_start();
-//Authentication::redirect_to_secure_conection();
+Authentication::redirect_to_secure_conection();
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
