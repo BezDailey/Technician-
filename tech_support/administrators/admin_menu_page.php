@@ -1,3 +1,7 @@
+<?php
+    include_once('../model/authentication.php');
+    Authentication::check_permissions('admin');
+?>
 <?php include('../view/header.php'); ?>
 <div id='main'>
     <h1>Admin Menu</h1>

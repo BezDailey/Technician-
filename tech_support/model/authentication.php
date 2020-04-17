@@ -41,5 +41,17 @@
                     break;
             }
         }
+
+        public static function check_permissions($role) {
+            switch($role) {
+                case 'admin':
+                    if($_SESSION['is_vaild_admin'] == "true"){
+
+                    } else {
+                        header('Location: /projects/Technician-/tech_support/administrators/admin_login_page.php');
+                    }
+                    break;
+            }
+        }
     }
 ?>
